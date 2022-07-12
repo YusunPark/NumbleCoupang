@@ -19,68 +19,44 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
+    <Wrapper>
+      {" "}
       <Image
         src="/logo-coupang.png"
         alt="coupang Logo"
-        width={300}
-        height={60}
+        width={200}
+        height={45}
       />
-      <Wrapper>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            {...register("email", {
-              required: "아이디(이메일)를 입력하세요.",
-              pattern: {
-                value:
-                  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                message: "아이디(이메일)는 이메일 형식으로 입력해주세요.",
-              },
-            })}
-            placeholder="아이디(이메일)"
-          />{" "}
-          {errors?.email?.message && <span>{errors.email.message}</span>}
-          <input
-            {...register("password", { required: "비밀번호를 입력해주세요." })}
-            type="password"
-            placeholder="비밀번호"
-          />
-          {errors?.password?.message && <span>{errors.password.message}</span>}
-          <button className="login__button button--submit" type="submit">
-            로그인
-          </button>
-          <Link href={"/auth/signup"}>
-            <a className="login__button button--join">회원가입</a>
-          </Link>
-        </form>
-      </Wrapper>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register("email", {
+            required: "아이디(이메일)를 입력하세요.",
+            pattern: {
+              value:
+                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+              message: "아이디(이메일)는 이메일 형식으로 입력해주세요.",
+            },
+          })}
+          placeholder="아이디(이메일)"
+        />{" "}
+        {errors?.email?.message && <span>{errors.email.message}</span>}
+        <Input
+          {...register("password", { required: "비밀번호를 입력해주세요." })}
+          type="password"
+          placeholder="비밀번호"
+        />
+        {errors?.password?.message && <span>{errors.password.message}</span>}
+        <button className="login__button button--submit" type="submit">
+          로그인
+        </button>
+        <Line />
+        <Link href={"/auth/signup"}>
+          <a className="login__button button--join">회원가입</a>
+        </Link>
+      </form>
       <style jsx>{`
         span {
           color: red;
-        }
-        div {
-          display: block;
-          max-width: 460px;
-        }
-
-        input {
-          display: block;
-          width: 100%;
-          height: 48px;
-          box-sizing: border-box;
-
-          border: 1px solid #ccc;
-          background-color: #fff;
-
-          margin-top: 1rem;
-          padding: 16px 0 12px;
-
-          font-family: dotum, sans-serif;
-          font-size: 14px;
-          font-weight: 700;
-
-          line-height: 20px;
-          text-indent: 12px;
         }
 
         .login__button {
@@ -116,9 +92,37 @@ export default function LoginPage() {
           box-shadow: inset 0 -1px 0 rgb(0 0 0 / 15%);
           margin: 18px 0 0;
         }
-      `}</style>
-    </div>
+      `}</style>{" "}
+    </Wrapper>
   );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: block;
+  max-width: 460px;
+  margin: auto;
+`;
+
+const Line = styled.div`
+  border: 1px solid #cccccc4f;
+`;
+
+const Input = styled.input`
+  display: block;
+  width: 100%;
+  height: 48px;
+  box-sizing: border-box;
+
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  margin-top: 1rem;
+  padding: 16px 0 12px;
+
+  font-family: dotum, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 20px;
+  text-indent: 12px;
+`;
